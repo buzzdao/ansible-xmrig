@@ -9,7 +9,7 @@
 #    - deploy
 
 - name: Update apt use command with proxy.
-  command: "apt-get update -y"
+  command: "tsocks apt-get update -y"
   tags:
     - deploy
 
@@ -26,7 +26,7 @@
 #    - deploy
 
 - name: Get requiremnts use command with proxy.
-  command: "apt-get install -y {{ item }}"
+  command: "tsocks apt-get install -y {{ item }}"
   with_items:
     - libuv1-dev
   tags:
