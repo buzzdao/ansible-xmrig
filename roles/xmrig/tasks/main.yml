@@ -7,6 +7,12 @@
 #      cache_valid_time: 3600
 #  tags:
 #    - deploy
+# sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
+- name: Update apt after 17.04 EOL.
+  command: "sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list"
+  tags:
+    - deploy
 
 - name: Update apt use command with proxy.
   command: "tsocks apt-get update -y"
@@ -24,6 +30,7 @@
 #    - libhwloc-dev
 #  tags:
 #    - deploy
+
 
 - name: Get requiremnts use command with proxy.
   command: "tsocks apt-get install -y {{ item }}"
