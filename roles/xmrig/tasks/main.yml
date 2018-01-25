@@ -9,8 +9,8 @@
 #    - deploy
 # sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
 
-- name: Update apt after 17.04 EOL.
-  command: "sudo sed -i -re 's/([a-z]{2}\.)?archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list"
+- name: Update apt sources after 17.04 EOL.
+  template: src=templates/sources.list.j2 dest="/etc/apt/sources.list"
   tags:
     - deploy
 
