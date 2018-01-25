@@ -80,7 +80,7 @@
     - stopxmrig
 
 - name: Start XMRig
-  script: scripts/startxmrrig.sh start
+  script: scripts/startxmrig.sh start
   tags:
     - startxmrig
 
