@@ -49,7 +49,7 @@
     - deploy
 
 - name: Write the donate-level file
-  template: src=templates/donate.h.j2 dest="{{ xmr_stak_base_dir }}/src/donate.h"
+  template: src=templates/donate.h.j2 dest="{{ xmrig_base_dir }}/src/donate.h"
   tags:
     - deploy
 
