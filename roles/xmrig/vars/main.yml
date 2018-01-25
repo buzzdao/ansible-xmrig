@@ -1,0 +1,7 @@
+---
+# vars file for ansible-role-xmrig
+# xmr_currency: monero
+
+# xmrig_version: v2.4.4
+xmrig_base_dir: /root/xmrig
+xmrig_build_dir: "{{ xmrig_base_dir }}/build"

@@ -1,0 +1,85 @@
+---
+# tasks file for ansible-xmrig
+
+#- name: Update apt.
+#  apt:
+#      update_cache: yes
+#      cache_valid_time: 3600
+#  tags:
+#    - deploy
+
+- name: Update apt use command with proxy.
+  command: "tsocks apt-get update -y"
+  tags:
+    - deploy
+
+#- name: Get requiremnts.
+#  apt:
+#    name: "{{ item }}"
+#  with_items:
+#    - libmicrohttpd-dev
+#    - libssl-dev
+#    - cmake
+#    - build-essential
+#    - libhwloc-dev
+#  tags:
+#    - deploy
+
+- name: Get requiremnts use command with proxy.
+  command: "tsocks apt-get install -y {{ item }}"
+  with_items:
+    - libuv1-dev
+  tags:
+    - deploy
+
+- name: Download sources.
+  git:
+    repo: https://github.com/buzzdao/xmrig.git
+    dest: "{{ xmrig_base_dir }}"
+#    version: "{{ xmrig_version }}"
+    force: yes
+  tags:
+    - deploy
+
+- name: Write the donate-level file
+  template: src=templates/donate.h.j2 dest="{{ xmr_stak_base_dir }}/src/donate.h"
+  tags:
+    - deploy
+
+- name: Create the working directory.
+  file:
+    path: "{{ xmrig_build_dir }}"
+    state: directory
+  tags:
+    - deploy
+
+- name: Make the package.
+  command: "cmake .. -DWITH_LIBCPUID=OFF -DWITH_AEON=OFF -DWITH_HTTPD=OFF -DUV_LIBRARY=/usr/lib/x86_64-linux-gnu/libuv.a"
+  args:
+    chdir: "{{ xmrig_build_dir }}"
+  tags:
+    - deploy
+
+- name: Install the package.
+  command: "make"
+  args:
+    chdir: "{{ xmrig_build_dir }}"
+  tags:
+    - deploy
+
+- name: Stop XMRig
+  script: scripts/stopxmrig.sh start
+  tags:
+    - stopxmrig
+
+- name: Start XMRig
+  script: scripts/startxmrrig.sh start
+  tags:
+    - startxmrig
+
+- name: Start Reboot
+  shell: sleep 2 && /sbin/shutdown -r now "Server will reboot now"
+  async: 1
+  poll: 0
+  tags:
+    - reboot
