@@ -41,7 +41,7 @@
 
 - name: Download sources.
   git:
-    repo: https://github.com/buzzdao/xmrig.git
+    repo: https://github.com/xmrig/xmrig.git
     dest: "{{ xmrig_base_dir }}"
 #    version: "{{ xmrig_version }}"
     force: yes
