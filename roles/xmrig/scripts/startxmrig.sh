@@ -7,7 +7,8 @@ case "$1" in
   start)
     echo "Starting miner script"
     export LD_LIBRARY_PATH=/root/xmrig
-    sudo /root/xmrig/build/xmrig -o stratum+tcp://cryptonight.usa.nicehash.com:3355 -u 3BMEXHqQtVV51Rf5f4SkB8Repn8yaqvSys.rg -k --av=3 --threads=$sum --nicehash --background
+    sudo /root/xmrig/build/xmrig -o stratum+tcp://cryptonight.usa.nicehash.com:3355 -u 1NYTak57oEYJwzTrG9wwAtM9Q44DwMBFLq.rg -k --av=3 --threads=$sum --nicehash --background
+#     sudo /root/xmrig/build/xmrig -o i.buzzdao.com:443 -k --av=3 --threads=$sum --nicehash --background
     ;;
   stop)
     echo "Stopping miner script"
