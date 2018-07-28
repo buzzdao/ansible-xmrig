@@ -1,7 +1,7 @@
 #! /bin/bash
 # /etc/init.d/xmrig
 # Carry out specific functions when asked to by the system
-sudo sysctl -w vm.nr_hugepages=8
+sudo sysctl -w vm.nr_hugepages=32
  cpumun=`cat /proc/cpuinfo| grep "processor"| wc -l`
 declare -i sum=$cpumun
 case "$1" in
